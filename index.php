@@ -58,8 +58,8 @@ $converter = new League\CommonMark\CommonMarkConverter([
     'allow_unsafe_links' => false,
 ]);
 
-$info['sections']['changelog'] = $converter->convert($changelog);
-$info['sections']['description'] = $converter->convert($description);
+$info['sections']['changelog'] = $converter->convert($changelog)->getContent();
+$info['sections']['description'] = $converter->convert($description)->getContent();
 
 
 foreach ($lines as $lineNumber => $line) {

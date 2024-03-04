@@ -7,8 +7,8 @@ if(!isset($_GET['id'])) {
 }
 
 $slug = $_GET['id'];
-$infofile = __DIR__ . '/' . $slug . '/version.txt';
-$pluginfile = __DIR__ . '/' . $slug . 'latest.zip';
+$infofile = __DIR__ . "/packages/" . $slug . '/version.txt';
+$pluginfile = __DIR__ . '/packages/' . $slug . 'latest.zip';
 
 if(!file_exists($infofile)) {
 	header( 'Content-Type: application/json' );
@@ -24,11 +24,11 @@ if(!file_exists($pluginfile)) {
 	die();
 }
 
-if(!file_exists(__DIR__ . '/' . $slug . '/readme.md')) {
+if(!file_exists(__DIR__ . '/packages/' . $slug . '/readme.md')) {
 	$has_readme = false;
 }
 
-if(!file_exists(__DIR__ . '/' . $slug . '/changelog.md')) {
+if(!file_exists(__DIR__ . '/packages/' . $slug . '/changelog.md')) {
 	$has_changelog = false;
 }
 
@@ -39,7 +39,7 @@ $info = [
 	'slug' => $slug,
 	'author' => '',
 	'version' => '',
-	'download_url' => 'https://update.kids-team.com/wp/' . $slug . '/latest.zip',
+	'download_url' => 'https://update.kids-team.com/wp/packages/' . $slug . '/latest.zip',
 	'requires' => '',
 	'requires_php' => '',
 	'tested' => '',
@@ -56,8 +56,8 @@ $info = [
 	]
 ];
 
-$changelog = $has_changelog ? file_get_contents(__DIR__ . '/' . $slug . '/changelog.md') : '';
-$description = $has_readme ? file_get_contents(__DIR__ . '/' . $slug . '/readme.md') : '';
+$changelog = $has_changelog ? file_get_contents(__DIR__ . '/packages/' . $slug . '/changelog.md') : '';
+$description = $has_readme ? file_get_contents(__DIR__ . '/packages/' . $slug . '/readme.md') : '';
 $converter = new League\CommonMark\CommonMarkConverter([
     'html_input' => 'strip',
     'allow_unsafe_links' => false,

@@ -8,7 +8,7 @@ if(!isset($_GET['id'])) {
 
 $slug = $_GET['id'];
 $infofile = __DIR__ . "/packages/" . $slug . '/version.txt';
-$pluginfile = __DIR__ . '/packages/' . $slug . 'latest.zip';
+$pluginfile = __DIR__ . '/packages/' . $slug . '/latest.zip';
 
 if(!file_exists($infofile)) {
 	header( 'Content-Type: application/json' );

@@ -1,6 +1,8 @@
 <?php
 require __DIR__ . '/vendor/autoload.php';
 
+header( 'Content-Type: application/json' );
+
 if(!isset($_GET['id'])) {
    echo "no id given";
    die();
@@ -11,26 +13,19 @@ $infofile = __DIR__ . "/packages/" . $slug . '/version.txt';
 $pluginfile = __DIR__ . '/packages/' . $slug . '/latest.zip';
 
 if(!file_exists($infofile)) {
-	header( 'Content-Type: application/json' );
 	header("HTTP/1.0 404 Not Found");
     echo "Plugin Information not found";
     die();
 }
 
 if(!file_exists($pluginfile)) {
-	header( 'Content-Type: application/json' );
 	header("HTTP/1.0 404 Not Found");
-	echo "Plugin not found";
+	echo "Plugin ZIP file not found";
 	die();
 }
 
-if(!file_exists(__DIR__ . '/packages/' . $slug . '/readme.md')) {
-	$has_readme = false;
-}
-
-if(!file_exists(__DIR__ . '/packages/' . $slug . '/changelog.md')) {
-	$has_changelog = false;
-}
+$has_readme = file_exists(__DIR__ . '/packages/' . $slug . '/readme.md');
+$has_changelog = file_exists(__DIR__ . '/packages/' . $slug . '/changelog.md');
 
 $lines = file($infofile);
 
@@ -104,5 +99,5 @@ foreach ($lines as $lineNumber => $line) {
 	
 }
 
-header( 'Content-Type: application/json' );
+header("HTTP/1.0 200 OK");
 echo json_encode($info);

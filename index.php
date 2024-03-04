@@ -10,7 +10,7 @@ if(!isset($_GET['id'])) {
 
 $slug = $_GET['id'];
 $infofile = __DIR__ . "/packages/" . $slug . '/version.txt';
-$pluginfile = __DIR__ . '/packages/' . $slug . '/latest.zip';
+$pluginfile = __DIR__ . '/packages/' . $slug . "/$slug.zip";
 
 if(!file_exists($infofile)) {
 	header("HTTP/1.0 404 Not Found");
@@ -34,7 +34,7 @@ $info = [
 	'slug' => $slug,
 	'author' => '',
 	'version' => '',
-	'download_url' => 'https://update.kids-team.com/wp/packages/' . $slug . '/latest.zip',
+	'download_url' => 'https://update.kids-team.com/wp/packages/' . $slug . "/$slug.zip",
 	'requires' => '',
 	'requires_php' => '',
 	'tested' => '',

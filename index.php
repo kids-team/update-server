@@ -105,4 +105,4 @@ foreach ($lines as $lineNumber => $line) {
 }
 
 header( 'Content-Type: application/json' );
-echo $info;
+echo json_encode($info);
